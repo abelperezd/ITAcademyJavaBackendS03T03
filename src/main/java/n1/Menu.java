@@ -1,5 +1,6 @@
 package n1;
 
+import n1.enums.Material;
 import n1.interfaces.IShopObservable;
 import n1.interfaces.IShopObserver;
 import n1.items.Arbre;
@@ -67,9 +68,9 @@ public class Menu implements IShopObservable {
         observers.forEach(o -> o.showStock());
 
     }
+
     @Override
     public void purchaseFinished(ShoppingList list) {
-
         observers.forEach(o -> o.purchaseFinished(list));
     }
 
@@ -108,6 +109,8 @@ public class Menu implements IShopObservable {
 
     private void buy() {
 
+        System.out.println("\n---BUY---\n");
+
         ShoppingList list = new ShoppingList();
         showStock();
 
@@ -118,9 +121,15 @@ public class Menu implements IShopObservable {
             if (valueRead != -1)
                 list.addItemToBuy(valueRead);
         }
-        purchaseFinished(list);
 
-        System.out.println("Compra realitzada correctament");
+        if (list.getItemsToBuy().size() > 0) {
+            purchaseFinished(list);
+            System.out.println("Compra realitzada correctament");
+        }
+        else{
+            System.out.println("Compra cancel·lada");
+        }
+        System.out.println("");
     }
 
     //region Add items
@@ -140,11 +149,12 @@ public class Menu implements IShopObservable {
     private void addArbre() {
         String name = getName();
         float preu = getPrice();
-        System.out.println("Alçaca: ");
+        System.out.println("Alçada: ");
         float alcada = scanner.nextFloat();
         scanner.nextLine();
 
         addItem(new Arbre(name, preu, alcada));
+        System.out.println("");
     }
 
     private void addFlor() {
@@ -155,22 +165,26 @@ public class Menu implements IShopObservable {
         String color = scanner.nextLine();
 
         addItem(new Flor(name, preu, color));
+        System.out.println("");
     }
 
     private void addDecoracio() {
         String name = getName();
         float preu = getPrice();
 
-        System.out.println("Material (0: fusta/ 1:plastic): ");
+        System.out.println("Material (0: fusta / 1:plastic): ");
         int materialIndex = scanner.nextInt();
         scanner.nextLine();
 
         addItem(new Decoracio(name, preu, Material.values()[materialIndex]));
+        System.out.println("");
     }
 
     //endregion
 
     void deleteItem() {
+        System.out.println("\n---ELIMINAR ITEM---\n");
+
         showStock();
 
         System.out.println("Index de l'element a eliminar: ");
@@ -178,6 +192,8 @@ public class Menu implements IShopObservable {
         scanner.nextLine();
 
         removeItem(ind);
+
+        System.out.println("");
     }
 
 }

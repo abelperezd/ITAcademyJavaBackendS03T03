@@ -6,15 +6,13 @@ package n1;
 //About serialization:
 //https://www.baeldung.com/java-custom-annotation
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
+import n1.serialization.Serializer;
 
 @SuppressWarnings("deprecation")
 public class Main {
     public static void main(String[] args) {
 
-        Floristeria floristeria = new Floristeria();
+        Floristeria floristeria = Serializer.loadFloristeria();
 
         //TODO: get the persistence from the database
 
@@ -23,6 +21,8 @@ public class Main {
         menu.addObserver(floristeria);
         menu.displayMenu();
         menu.removeObserver(floristeria);
+
+        Serializer.saveFloristeria(floristeria);
     }
 }
 
