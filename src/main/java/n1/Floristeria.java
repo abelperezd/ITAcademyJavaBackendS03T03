@@ -12,13 +12,19 @@ public class Floristeria implements IShopObserver {
 
     @Override
     public void showStock() {
+        System.out.println("\n---STOCK---\n");
+
+        System.out.printf("%-10s %-10s %-10s %-10s \n", "ID", "NOM", "PREU", "OTHER");
         float value = 0;
+        int ind = 0;
         for (Item i : items) {
             value += i.getPreu();
-            i.printItem();
+            i.printItem(ind++);
         }
+        System.out.println("");
         System.out.println("Stock: " + items.size());
         System.out.println("Value: " + value);
+        System.out.println("");
     }
 
     @Override
@@ -33,19 +39,25 @@ public class Floristeria implements IShopObserver {
         for (Item item : itemsBought) {
             incomes += item.getPreu();
             tiquet.addProduct(item);
-            tiquets.addTiquet(tiquet);
             items.remove(item);
         }
+        tiquets.addTiquet(tiquet);
     }
 
     @Override
     public void showTickets() {
+        System.out.println("\n---TICKETS---\n");
+
         tiquets.showTickets();
+
+        System.out.println("");
     }
 
     @Override
     public void showIncomes() {
+        System.out.println("");
         System.out.println("Ingressos: " + incomes);
+        System.out.println("");
     }
 
     @Override
@@ -59,5 +71,4 @@ public class Floristeria implements IShopObserver {
             return;
         items.remove(pos);
     }
-
 }

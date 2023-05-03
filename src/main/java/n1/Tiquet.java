@@ -14,7 +14,10 @@ public class Tiquet {
 
     public void showProducts() {
         System.out.printf("%-10s %-10s %-10s \n", "NOM", "PREU", "INF. EXTRA");
-        products.forEach(p -> p.printItem());
+        int ind = 0;
+        for (Item product : products) {
+            product.printItem(ind++);
+        }
     }
 
 
