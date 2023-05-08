@@ -1,4 +1,4 @@
-package n1;
+package n2;
 
 //Good video about annotations
 //https://www.youtube.com/watch?v=DkZr7_c9ry8
@@ -6,13 +6,15 @@ package n1;
 //About serialization:
 //https://www.baeldung.com/java-custom-annotation
 
-import n1.serialization.Serializer;
+import n2.DDBB.SQLConnector;
 
 @SuppressWarnings("deprecation")
 public class Main {
     public static void main(String[] args) {
 
-        Floristeria floristeria = Serializer.loadFloristeria();
+        new SQLConnector();
+
+        Floristeria floristeria = new Floristeria();
 
         Menu menu = new Menu();
 
@@ -20,7 +22,8 @@ public class Main {
         menu.displayMenu();
         menu.removeObserver(floristeria);
 
-        Serializer.saveFloristeria(floristeria);
+        SQLConnector.Instance().Close();
     }
+
 }
 

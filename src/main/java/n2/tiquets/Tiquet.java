@@ -1,6 +1,6 @@
-package n1;
+package n2.tiquets;
 
-import n1.items.Item;
+import n2.items.Item;
 
 import java.util.LinkedList;
 

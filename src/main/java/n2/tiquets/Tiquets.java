@@ -1,4 +1,4 @@
-package n1;
+package n2.tiquets;
 
 import java.util.LinkedList;
 
@@ -16,4 +16,9 @@ public class Tiquets {
             System.out.println("");
         }
     }
+
+    public int getTiquetsAmount(){
+        return tiquets.size();
+    }
+
 }
